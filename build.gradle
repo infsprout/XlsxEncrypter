@@ -1,0 +1,29 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'java'
+}
+
+group 'com.infsprout'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:unchecked', '-Xlint:deprecation']
+}
+
+dependencies {
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.0'
+    compile group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.47'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'com.infsprout.xlsxencrypter.XlsxEncrypter'
+    }
+    archiveFileName = 'XlsxEncrypter.jar'
+    mergeServiceFiles()
+}
